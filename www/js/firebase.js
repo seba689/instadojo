@@ -11,3 +11,4 @@ var firebaseConfig = {
 };
   // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+firedb = firebase.database().ref();
