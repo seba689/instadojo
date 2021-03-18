@@ -1,6 +1,8 @@
 
-
 // Your web app's Firebase configuration
+var fireBase = fireBase || fireBase;
+var hasInit = false;
+
 var firebaseConfig = {
     apiKey: "AIzaSyDH5b4Phzi4FxsZOqlKWCULW--AjYRlfKk",
     authDomain: "instadojo-d01e0.firebaseapp.com",
@@ -10,5 +12,10 @@ var firebaseConfig = {
     appId: "1:769652675950:web:c250de6babe52904819d7f"
 };
   // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-firedb = firebase.database().ref();
+
+
+if(!hasInit){
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  hasInit =  true;
+}

@@ -13,7 +13,7 @@
     Unless required by applicable law or agreed to in writing,
     software distributed under the License is distributed on an
     "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-    KIND, either express or implied.  See the License for the
+     KIND, either express or implied.  See the License for the
     specific language governing permissions and limitations
     under the License.
 -->
@@ -48,54 +48,59 @@
         <title>Instagram</title>
     </head>
     <body>
-        <nav class="navbar navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand">InstaGram</a>
-                <form class="d-flex">
-                    <button class="btn btn-outline-success" type="submit"id="editar">Edit</button>
-                <button class="btn btn-outline-dark" type="submit"id="logout">logOut</button>
-                </form>
+        <div class="container my-5 border">
+            <div class="row">
+                <div class="col-2 col-sm-2"></div>
+                <div class="col-8 col-sm-8 text-center my-5"><h1 class="text-secondary font-italic">Instagram</h1></div>
+                <div class="col-2 col-sm-2"></div>
             </div>
-        </nav>
-        
-        <div class="muro">
-            
-            
-        </div>
-        <div class="container">
-
-            <div class="position-relative " style="margin-top: 550px;">
-                <a href="subirfoto.html"><img class="position-absolute bottom-0 " src="img/botonmas.png" alt="guarda foto"
-                    style="height: 50px; width: 50px;margin-left: 145px;"></a>
-            </div>
-        </div>
-        <div class="modal fade " id="perfil" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Editar Perfil</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close5"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form class="row g-3 needs-validation" novalidate id="signup-form">
-                            <div class="col-md-11">
-                                <img src="img/kisspng-avatar-user-profile-male-logo-profile-icon-5b238cafcb8559.4398361515290564318336.jpg" class="mx-4" alt="usuario" style="width: 250px;height: 300px;border-radius: 50%;">
-                                <input type="file" id="user" class="mt-2">
-                                <input type="text" class="form-control my-3">
-                            </div>
-                            <div class="col-12">
-                                <button class="btn btn-success my-4 " type="submit" id="update">ingresar</button>
-                                <button class="btn btn-danger " type="submit" id="close4">close</button>
-                            </div>
-                        </form>
-                    </div>
+            <div class="row">
+                <div class="col-2 col-sm-2"></div>
+                <div class="col-8 col-sm-8 my-2">
+                <input class="form-control " type="text" placeholder="Correo electronico" id="email" >
                 </div>
+                <div class="col-2 col-sm-2"></div>
+            </div>
+            <div class="row">
+                <div class="col-2 col-sm-2"></div>
+                <div class="col-8 col-sm-8 my-2">
+                <input class="form-control " type="password" placeholder="Contraseña" id="password" >
+                </div>
+                <div class="col-2 col-sm-2"></div>
+            </div>
+            <div class="row">
+                <div class="col-2 col-sm-2"></div>
+                
+                <button type="submit" class="btn btn-info text-primary col-8 col-sm-8 text-center mb-5 bg-info rounded" id="ingresar"><h3>Inicia sesion</h3></button>
+                
+                <div class="col-2 col-sm-2"></div>
+            </div>
+            <div class="row">
+                <div class="col-2 col-sm-2"></div>
+                <div class="col-8 col-sm-8 text-center mt-3 mb-5 border-top">Inicia Sesion con Gmail</div>
+                <div class="col-2 col-sm-2"></div>
+            </div>
+            <div class="row">
+                <div class="col-2 col-sm-2"></div>
+                
+                <button type="button" class="btn btn-info text-primary col-8 col-sm-8 text-center mb-5 bg-info rounded" id="google"><h3>Continuar con Google</h3></button>
+                
+                <div class="col-2 col-sm-2"></div>
+            </div>
+            <div class="row">
+                <div class="col-2 col-sm-2"></div>
+                <div class="col-4 col-sm-4 text-center mt-5 border-top">¿no tienes cuenta?</div>
+                <div class="col-4 col-sm-4 text-center mt-5 border-top"><a href="registro.html" class="text-primary">Registrate</a></div>
+                <div class="col-2 col-sm-2"></div>
             </div>
         </div>
+
+
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
         <script src="js/firebase.js"></script>
-        
         <!--<script src="cordova.js"></script>-->
+        
         <script src="js/index.js"></script>
     </body>
 </html>
