@@ -48,23 +48,24 @@
         <title>Instagram</title>
     </head>
     <body>
-        <nav class="navbar navbar-light bg-light">
+        <nav class="navbar navbar-light bg-light" style="background: rgb(2,0,36);
+        background: linear-gradient(146deg, rgba(2,0,36,1) 0%, rgba(121,9,63,1) 35%, rgba(0,212,255,1) 100%);">
             <div class="container-fluid">
-                <a class="navbar-brand">InstaGram</a>
+                <a class="navbar-brand text-light">InstaGram</a>
                 <form class="d-flex">
-                    <button class="btn btn-outline-success" type="submit"id="editar">Edit</button>
-                <button class="btn btn-outline-dark" type="submit"id="logout">logOut</button>
+                    <button class="btn btn-success mx-2" type="submit"id="editar">Edit</button>
+                    <button class="btn btn-dark" type="submit"id="logout">logOut</button>
                 </form>
             </div>
         </nav>
         
-        <div class="muro">
+        <div class="" id="muro">
             
             
         </div>
         <div class="container">
 
-            <div class="position-relative " style="margin-top: 550px;">
+            <div class="position-relative " style="margin-top: 450px;">
                 <a href="subirfoto.html"><img class="position-absolute bottom-0 " src="img/botonmas.png" alt="guarda foto"
                     style="height: 50px; width: 50px;margin-left: 145px;"></a>
             </div>
@@ -80,11 +81,11 @@
                         <form class="row g-3 needs-validation" novalidate id="signup-form">
                             <div class="col-md-11">
                                 <img src="img/kisspng-avatar-user-profile-male-logo-profile-icon-5b238cafcb8559.4398361515290564318336.jpg" class="mx-4" alt="usuario" style="width: 250px;height: 300px;border-radius: 50%;">
-                                <input type="file" id="user" class="mt-2">
-                                <input type="text" class="form-control my-3">
+                                <input type="file" id="foto" class="mt-2">
+                                <input type="text" class="form my-3" id="user">
                             </div>
                             <div class="col-12">
-                                <button class="btn btn-success my-4 " type="submit" id="update">ingresar</button>
+                                <button class="btn btn-success my-4 " type="submit" id="update">UpDate</button>
                                 <button class="btn btn-danger " type="submit" id="close4">close</button>
                             </div>
                         </form>
