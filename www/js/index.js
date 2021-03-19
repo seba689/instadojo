@@ -21,20 +21,44 @@
 // See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
 document.addEventListener('deviceready', onDeviceReady, false);
 
-var provider = new firebase.auth.GoogleAuthProvider();
-var loged = 0;
 function onDeviceReady() {
+    // Cordova is now initialized. Have fun!
+    document.getElementById("cameraTakePicture").addEventListener 
+    ("click", cameraTakePicture); 
+
+
     
 }
+
+
+var provider = new firebase.auth.GoogleAuthProvider();
+var loged = 0;
 
 const firedb = firebase.database().ref();
 const auth = firebase.auth();
 const storage = firebase.storage();
+var user = firebase.auth().currentUser;
+
+firebase.database().ref('usuario').once('value',function(snapshot){
+    snapshot.forEach(function(childSnapshot){
+        reg=childSnapshot.val()
+        key=childSnapshot.key
+        
+        $('test').append(`
+            <div class="coment">
+                <h2>${reg.user}</h2>
+                <p>${reg.text}</p>
+            </div>
+        `);
+        console.log(key)
+    })
+});
 
 $('#reg').click(function (e) { 
     e.preventDefault();
     $('#exampleModal').modal('toggle');
 });
+
 $('#enviar').click(function (e) { 
     e.preventDefault();
     email = $('#validationCustom01').val();
@@ -58,7 +82,6 @@ $('#enviar').click(function (e) {
     console.log('click')
 });
 
-
 $('#ingresar').click(function (e) { 
     e.preventDefault();
     email = $('#email').val();
@@ -69,6 +92,7 @@ $('#ingresar').click(function (e) {
     .then(userCredential=>{
     console.log('signin')
     window.location.replace("index.html");
+
     })
 })
 // iniciar con google
@@ -98,6 +122,7 @@ $('#google').click(function (e) {
     console.log('click')
 });
 
+
 // cerrar sesion
 
 $('#logout').click(function (e) { 
@@ -109,16 +134,31 @@ $('#logout').click(function (e) {
     location.reload()
 });
 
+//dibujar contenido en la pantalla de muro
+cont =[]; //arreglo que contiene las publicaciones del usuario , para poder dibujarlas en un loop for
+//funcion que muesta los usuarios de la app , y datos del usuario conectado 
+function contenido(user) {
+    $('#muro').append(
+        `<div class="contenido mx-2 my-2">
+            <div class="userId">
+            <img src="img/kisspng-avatar-user-profile-male-logo-profile-icon-5b238cafcb8559.4398361515290564318336.jpg" alt="" style="width:80px; height:80px; border:1px solid black;;border-radius: 50%;" >
+            <img src="img/kisspng-avatar-user-profile-male-logo-profile-icon-5b238cafcb8559.4398361515290564318336.jpg" alt="" style="width:80px; height:80px; border:1px solid black;;border-radius: 50%;" >
+            <img src="img/kisspng-avatar-user-profile-male-logo-profile-icon-5b238cafcb8559.4398361515290564318336.jpg" alt="" style="width:80px; height:80px; border:1px solid black;;border-radius: 50%;" >
+            </div>
+            <div class="user">
+                <h5 class="mt-2" id="name">${user.name}</h3>
+            </div>
+        </div>`
+    );
+}
+
 //consulta de autenticacion
-
-
 
     auth.onAuthStateChanged(user=>{
         if(user){
             console.log('signed')
             console.log(user);
             
-
             var name, email, photoUrl, uid, emailVerified;
 
             if (user != null) {
@@ -131,6 +171,7 @@ $('#logout').click(function (e) {
                             // you have one. Use User.getToken() instead.
             }
             console.log(name)
+            contenido(user)
         }
         else{
             console.log('not signed');
@@ -146,3 +187,57 @@ $('#logout').click(function (e) {
         e.preventDefault();
         $('#perfil').modal('toggle');
     });
+
+    
+//agregar nombre de ususario y foto de perfil
+
+$('#update').click(function (e) { 
+    e.preventDefault();
+    usuario = document.getElementById('user').value;
+    //perf = $('#foto').val();
+    var user = firebase.auth().currentUser;
+
+    user.updateProfile({
+    displayName: usuario,
+    //photoURL: "https://example.com/jane-q-user/profile.jpg"
+    }).then(function() {
+  // Update successful.
+    }).catch(function(error) {
+  // An error happened.
+    });
+
+    console.log(user)
+    location.reload()
+});
+
+function posteo(){
+    let user = $('#post').val();
+    let text = $("#texto").val();
+
+    if(text!="" && url!=""){
+        let nuevoPost = post.push();
+        nuevoPost.set({
+            user : user,
+            text : text,
+        });
+    }
+    location.reload()
+}
+
+
+
+function cameraTakePicture() { 
+    navigator.camera.getPicture(onSuccess, onFail, {  
+        quality: 50, 
+        destinationType: Camera.DestinationType.DATA_URL 
+    });  
+    
+    function onSuccess(imageData) { 
+        var image = document.getElementById('camara'); 
+        image.src = "data:image/jpeg;base64," + imageData; 
+    }  
+    
+    function onFail(message) { 
+        alert('Failed because: ' + message); 
+    } 
+}
