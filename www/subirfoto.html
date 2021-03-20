@@ -17,7 +17,7 @@
     specific language governing permissions and limitations
     under the License.
 -->
-<html>
+<html class="h-100">
 
 <head>
     <meta charset="utf-8">
@@ -45,6 +45,9 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <!--Fontawesome icons-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 
     <link rel="stylesheet" href="css/index.css">
     <title>Instagram</title>
@@ -53,64 +56,76 @@
 <body>
     <nav class="navbar navbar-light bg-light" style="background: rgb(2,0,36);
         background: linear-gradient(146deg, rgba(2,0,36,1) 0%, rgba(121,9,63,1) 35%, rgba(0,212,255,1) 100%);">
-            <div class="container-fluid">
-                <a class="navbar-brand text-light">InstaGram</a>
-                <form class="d-flex">
-                    <button class="btn btn-dark" type="submit"id="logout">logOut</button>
-                </form>
-            </div>
-        </nav>
-    <div>
-        <div class="container">
-            <div class="row">
-                <p class="h4 col-sm text-center my-1">Nueva Publicación</p>
-            </div>
+        <div class="container-fluid">
+            <a href="/" class="navbar-brand text-light">InstaGram</a>
+            <form class="d-flex">
+                <button class="btn btn-dark" type="submit" id="logout">logOut</button>
+            </form>
         </div>
-        <div class="container app">
-            <div class="row">
-                <img class="mx-4 my-3" style="width: 300px;"  src="img/logo.png" alt="foto" id="camara">
+    </nav>
+    <main class="flex-shrink-0 overflow-auto" id="main">
+        <div>
+            <div class="container">
+                <div class="row">
+                    <p class="h4 col-sm text-center my-1">Nueva Publicación</p>
+                </div>
             </div>
+            <div class="container app">
+                <div class="row">
+                    <img class="mx-4 my-3" style="width: 300px;" src="img/logo.png" alt="foto" id="camara">
+                </div>
 
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="form-floating col-md">
-                    <textarea class="form-control "  id="floatingTextarea2"
-                        style="height: 60px" ></textarea>
-                    <label for="floatingTextarea2" >Coloca una descripcion</label>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="form-floating col-md">
+                        <textarea class="form-control " id="floatingTextarea2" style="height: 60px"></textarea>
+                        <label for="floatingTextarea2">Coloca una descripcion</label>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="container">
+
+    </main>
+    <div class="row">
         <label>
-            <img class="position-absolute top-50 start-50 translate-middle" 
-            src="img/iconoguardar.png"  alt="boton guardar"
-                style="height: 25px; width: 25px; margin-top: 250px;">
-            <input type="file" name="myfile" style="display:none">
+            <button class="btn col-md-12" style="color: black; font-size: 25px;"> <i class="fas fa-upload"></i>
+                <input type="file" name="myfile" style="display:">
+            </button>
+            
         </label>
     </div>
-    <div class="container">
-
-        <div class="position-relative " style="margin-top: 100px;">
-            <a href="index.html"><img class="position-absolute bottom-0 start-0" src="img/home.png" alt="boton de inicio"
-                style="height: 25px; width: 25px;"></a>
-            <img class="position-absolute bottom-0 start-50 translate-middle-x" id="cameraTakePicture" src="img/camara fotografica.png"
-                alt="tomar foto" style="height: 25px; width: 25px;">
-            <img class="position-absolute bottom-0 end-0" id="saveimg" src="img/botonmas.png" alt="guarda foto"
-                style="height: 25px; width: 25px;">
+    <footer class="footer mt-auto py-3 " style="background: rgb(2,0,36);
+        background: linear-gradient(146deg, rgba(2,0,36,1) 0%, rgba(121,9,63,1) 35%, rgba(0,212,255,1) 100%);">
+        <div class="container">
+            <div class="row">
+                <div class="col-4 ">
+                    <button class="btn" style="color: white; font-size: 25px;">
+                    <i class="fas fa-home"></i></i></button>
+                </div>
+                <div class="col-4 ">
+                    <button class="btn" style="color: white; font-size: 25px;" id="cameraTakePicture"> 
+                    <i class="fas fa-camera"> </i></button>
+                </div>
+                <div class="col-4 ">
+                    <button id="saveimg" class="btn" style="color: white; font-size: 25px;"> <i
+                    class="far fa-plus-square"></i></button>
+                </div>
+            </div>
         </div>
-    </div>
+    </footer>
+
     <div role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-bs-autohide="false" id="msm">
         <div class="toast-header">
-          <strong class="me-auto">InstaGram</strong>
-          <small id="currentime"></small>
-          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            <strong class="me-auto">InstaGram</strong>
+            <small id="currentime"></small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
         <div class="toast-body">
-          Tu Publicación se ha subido con éxito.
+            Tu Publicación se ha subido con éxito.
         </div>
-      </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
         crossorigin="anonymous"></script>

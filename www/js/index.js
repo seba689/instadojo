@@ -27,9 +27,14 @@ function onDeviceReady() {
     ("click", cameraTakePicture); 
     document.getElementById("saveimg").addEventListener 
     ("click", saveImg); 
-
+    
     
 }
+$( document ).ready(function() {
+    var tamanocont = screen.height - 170;
+    $('#main').css('max-height', tamanocont+'px');    
+});
+
 var toastElList = [].slice.call(document.querySelectorAll('.toast'))
 var toastList = toastElList.map(function (toastEl) {
   return new bootstrap.Toast(toastEl, {})
@@ -332,3 +337,4 @@ document.addEventListener("DOMContentLoaded", function(event) {
             }     
         });
     });
+     
