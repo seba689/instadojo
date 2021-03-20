@@ -25,11 +25,15 @@ function onDeviceReady() {
     // Cordova is now initialized. Have fun!
     document.getElementById("cameraTakePicture").addEventListener 
     ("click", cameraTakePicture); 
-
+    document.getElementById("saveimg").addEventListener 
+    ("click", saveImg); 
 
     
 }
-
+var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+var toastList = toastElList.map(function (toastEl) {
+  return new bootstrap.Toast(toastEl, {})
+})
 
 var provider = new firebase.auth.GoogleAuthProvider();
 var loged = 0;
@@ -38,6 +42,26 @@ const firedb = firebase.database().ref();
 const auth = firebase.auth();
 const storage = firebase.storage();
 var user = firebase.auth().currentUser;
+const commetimg= firebase.database().ref('commetimg');
+
+class Commetimg {
+    key;
+    urlImg;
+    userName;
+    userKey;
+    comment;
+    likes; 
+    
+    constructor() {
+        this.key = "";
+        this.urlImg = "";
+        this.userName= "";
+        this.userKey = "";
+        this.comment = "";
+        this.likes = []; 
+    }
+}
+
 
 firebase.database().ref('usuario').once('value',function(snapshot){
     snapshot.forEach(function(childSnapshot){
@@ -241,3 +265,70 @@ function cameraTakePicture() {
         alert('Failed because: ' + message); 
     } 
 }
+
+
+
+
+function saveImg(){
+    var user= firebase.auth().currentUser;
+    var uid = user.uid; //identificador del usuario activp
+    var userName = user.displayName == null ? user.email : user.displayName;
+    if($("#camara").attr('src').indexOf('data') > -1){
+        // Create a root reference
+        var storageRef = firebase.storage().ref();
+        // Create a reference to 'mountains.jpg'
+        var time = new Date().getTime();
+        var imgProfileRef = storageRef.child(uid+'/snapshot-'+ time+'.jpg');
+        var file = $("#camara").attr('src');
+        var img = file.replace("data:image/jpeg;base64,","");
+        imgProfileRef.putString(img, 'base64', {contentType:'image/jpg'}).then(function(snapshot) {
+            console.log('Imagen Subida a Firebase Storage !');
+        })
+        .then(function(){
+            imgProfileRef.getDownloadURL().then(function (downloadURL) {   // Obtengo la URL de la imagen 
+                console.log('URL de la imagen: ', downloadURL);
+                var comment= document.querySelector('#floatingTextarea2').value; 
+                let newComment = commetimg.push();
+                newComment.set({
+                    urlImg: downloadURL,
+                    userName: userName,
+                    userKey: uid,
+                    comment: comment,
+                    likes: []
+                });
+                newComment.on('value', (snapshot) => {
+                    $('#msm').addClass('show');
+                    document.querySelector('#floatingTextarea2').value='';
+                    $("#camara").attr('src','img/logo.png');
+                });
+            })
+        });
+    }
+}
+document.addEventListener("DOMContentLoaded", function(event) {
+          
+        var dataPosteos= [];
+        firebase.database().ref('commetimg').once('value', function (data) {
+            data.forEach(function (ccm) {
+                var ccmObject = new Commetimg();
+                ccmObject.key = ccm.key;
+                ccmObject.urlImg = ccm.val().urlImg;
+                ccmObject.userName = ccm.val().userName;
+                ccmObject.userKey = ccm.val().userKey;
+                ccmObject.comment = ccm.val().comment;
+                ccmObject.likes = ccm.val().likes;
+                dataPosteos.push(ccmObject); 
+            });
+            for (var i = 0; i < dataPosteos.length; i++) {
+                let dp=dataPosteos[i];
+                var tpl= `<div class="card">
+                            <img src="${dp.urlImg}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                            <h5 class="card-title">${dp.userName}</h5>
+                            <p class="card-text">${dp.comment}</p>
+                            </div>
+                            </div>`;
+                $('#mural').append(tpl);
+            }     
+        });
+    });
