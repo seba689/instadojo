@@ -27,14 +27,9 @@ function onDeviceReady() {
     ("click", cameraTakePicture); 
     document.getElementById("saveimg").addEventListener 
     ("click", saveImg); 
-    
+
     
 }
-$( document ).ready(function() {
-    var tamanocont = screen.height - 170;
-    $('#main').css('max-height', tamanocont+'px');    
-});
-
 var toastElList = [].slice.call(document.querySelectorAll('.toast'))
 var toastList = toastElList.map(function (toastEl) {
   return new bootstrap.Toast(toastEl, {})
@@ -166,7 +161,7 @@ $('#logout').click(function (e) {
 //dibujar contenido en la pantalla de muro
 cont =[]; //arreglo que contiene las publicaciones del usuario , para poder dibujarlas en un loop for
 //funcion que muesta los usuarios de la app , y datos del usuario conectado 
-function contenido(user) {
+function contenido(x) {
     $('#muro').append(
         `<div class="contenido mx-2 my-2">
             <div class="userId">
@@ -175,7 +170,7 @@ function contenido(user) {
             <img src="img/kisspng-avatar-user-profile-male-logo-profile-icon-5b238cafcb8559.4398361515290564318336.jpg" alt="" style="width:80px; height:80px; border:1px solid black;;border-radius: 50%;" >
             </div>
             <div class="user">
-                <h5 class="mt-2" id="name">${user.name}</h3>
+                <h5 class="mt-2" id="name">${x}</h3>
             </div>
         </div>`
     );
@@ -200,7 +195,7 @@ function contenido(user) {
                             // you have one. Use User.getToken() instead.
             }
             console.log(name)
-            contenido(user)
+            contenido(name)
         }
         else{
             console.log('not signed');
@@ -309,6 +304,7 @@ function saveImg(){
             })
         });
     }
+    
 }
 document.addEventListener("DOMContentLoaded", function(event) {
           
@@ -337,4 +333,3 @@ document.addEventListener("DOMContentLoaded", function(event) {
             }     
         });
     });
-     
